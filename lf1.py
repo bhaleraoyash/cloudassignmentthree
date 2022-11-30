@@ -65,7 +65,7 @@ def lambda_handler(event, context):
                     
         AWS_REGION = "us-east-1"
                 
-        subject_email = "Email Spam Detection using AWS andSagemaker"
+        subject_email = "Email Spam Detection using AWS and Sagemaker"
               
         email_body= "We received your email sent at "+ date+ " with the subject "+ subject + ".<br>Here is a 240 character sample of the email body:<br>" + email_msg + "<br>The email was categorized as " + predicted_label + " with a " + score + "% confidence."
         client = boto3.client('ses', region_name = AWS_REGION)
