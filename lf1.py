@@ -51,7 +51,7 @@ def lambda_handler(event, context):
         one_hot_test_messages = one_hot_encode(plain, vocabulary_length)
         encoded_test_messages = vectorize_sequences(one_hot_test_messages, vocabulary_length)
         payload = json.dumps(encoded_test_messages.tolist())
-        prediction = runtime.invoke_endpoint(EndpointName=ENDPOINT_NAME,ContentType = 'application/json', Body=payload)
+        prediction = runtime.invoke_endpoint(EndpointName = ENDPOINT_NAME, ContentType = 'application/json', Body = payload)
 
         result = json.loads(prediction["Body"].read().decode())
         pred = int(result.get('predicted_label')[0][0])
@@ -67,7 +67,7 @@ def lambda_handler(event, context):
                 
         subject_email = "Email Spam Detection using AWS andSagemaker"
               
-        email_body= "We received your email sent at "+ date+ " with the subject <b>"+ subject + "</b>.<br>Here is a 240 character sample of the email body:<br>" + email_msg + "<br>The email was categorized as " + predicted_label + " with a " + score + "% confidence."
+        email_body= "We received your email sent at "+ date+ " with the subject "+ subject + ".<br>Here is a 240 character sample of the email body:<br>" + email_msg + "<br>The email was categorized as " + predicted_label + " with a " + score + "% confidence."
         client = boto3.client('ses', region_name = AWS_REGION)
 
         try:
